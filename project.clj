@@ -1,4 +1,4 @@
-(defproject org.pinkgorilla/gorilla-leaflet "0.2.4"
+(defproject org.pinkgorilla/gorilla-leaflet "0.2.5-SNAPSHOT"
   :description "A renderer for Pink Gorilla Notebook that renders geo data using Leaflet maps."
   :url "https://github.com/pink-gorilla/pinkgorilla-leaflet"
   :license {:name "MIT License"
