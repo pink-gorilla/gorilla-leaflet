@@ -132,7 +132,8 @@
   "<div>
 <div id='{{map-id}}' style='height: {{height}}px; width: {{width}}px;'></div>
 <script type='text/javascript'>
-$(function () {
+(function() {
+  /*
   var cachedScript = function(url, options) {
     // Allow user to set any option except for dataType, cache, and url
     options = $.extend( options || {}, {
@@ -145,6 +146,7 @@ $(function () {
     // Return the jqXHR object so we can chain callbacks
     return jQuery.ajax(options);
   };
+  */
   var createMap = function() {
     var map = L.map('{{map-id}}')
     L.tileLayer('{{tile-layer-url}}')
@@ -178,16 +180,39 @@ $(function () {
     }
   };
   if (!document.getElementById('{{css-tag-id}}')) {
-    $('<link>')
-      .attr('rel', 'stylesheet')
-      .attr('href', '{{leaflet-css-url}}')
-      .attr('id', '{{css-tag-id}}')
-      .appendTo('head');
+      var css = document.createElement ('link');
+      css.setAttribute ('rel','stylesheet');
+      css.setAttribute ('href','gorilla-leaflet/css/leaflet-0.7.3.css');
+      css.setAttribute ('id','leaflet-css');
+      document.head.appendChild (css);
   }
   if (!window.leafletJsLoaded) {
     if (!window.leafletJsIsLoading) {
       window.leafletJsLoadedCallbacks = [createMap];
       window.leafletJsIsLoading = true;
+      fetch('gorilla-leaflet/js/leaflet-0.7.3.js')
+                .then((response) => {
+                  window.leafletJsIsLoading = false;
+                  window.leafletJsLoaded = true;
+                  return response.text();//json();
+                 })
+                .then((text) => {
+                    eval(text);
+                    console.log('Leaflet initialized');
+                    debugger;
+                    window.leafletJsLoadedCallbacks.forEach(
+                        cb => {
+                            // debugger;
+                            cb()
+                         } );
+                    // debugger;
+                    console.log('Leaflet loader callbacks executed');
+                })
+                .catch((error) => {
+                 console.error('Error:', error);
+                });
+
+      /*
       cachedScript('{{leaflet-js-url}}')
         .done(function() {
           window.leafletJsIsLoading = false;
@@ -196,13 +221,15 @@ $(function () {
           window.leafletJsLoadedCallbacks = [];
         })
         .fail(function() { console.log('failed'); });
+       */
     } else {
       window.leafletJsLoadedCallbacks.push(createMap);
     }
   } else {
     createMap();
   }
-});
+
+}());
 </script>
 </div>")
 
