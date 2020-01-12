@@ -10,7 +10,7 @@
   :dependencies [[org.clojure/clojure "1.10.1"]
                  [org.clojure/data.json "0.2.6"]
                  [selmer "0.8.9"]
-                 [org.pinkgorilla/gorilla-renderable "2.1.22"] ;PinkGorilla Renderable
+                 [org.pinkgorilla/gorilla-renderable "3.0.0"] ;PinkGorilla Renderable
                  ]
   :profiles
   {:dev
