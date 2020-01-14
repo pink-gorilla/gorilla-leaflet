@@ -133,6 +133,7 @@
 <div id='{{map-id}}' style='height: {{height}}px; width: {{width}}px;'></div>
 <script type='text/javascript'>
 (function() {
+  // debugger;
   /*
   var cachedScript = function(url, options) {
     // Allow user to set any option except for dataType, cache, and url
@@ -199,17 +200,17 @@
                 .then((text) => {
                     eval(text);
                     console.log('Leaflet initialized');
-                    debugger;
+                    // debugger;
                     window.leafletJsLoadedCallbacks.forEach(
                         cb => {
                             // debugger;
                             cb()
                          } );
-                    // debugger;
                     console.log('Leaflet loader callbacks executed');
                 })
                 .catch((error) => {
-                 console.error('Error:', error);
+                    pinkgorilla.notifications.add_notification('Leaflet failed : ' + error);
+                    ;; console.error('Error:', error);
                 });
 
       /*
