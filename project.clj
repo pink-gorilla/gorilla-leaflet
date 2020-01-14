@@ -1,5 +1,5 @@
 (defproject org.pinkgorilla/gorilla-leaflet "0.2.7-SNAPSHOT"
-  :description "A renderer for Pink Gorilla Notebook that renders geo data using Leaflet maps."
+  :description "A renderer for Pink Gorilla Notebook based on Leaflet maps."
   :url "https://github.com/pink-gorilla/pinkgorilla-leaflet"
   :license {:name "MIT License"
             :url  "http://opensource.org/licenses/MIT"}
@@ -10,21 +10,17 @@
   :dependencies [[org.clojure/clojure "1.10.1"]
                  [org.clojure/data.json "0.2.6"]
                  [selmer "0.8.9"]
-                 [org.pinkgorilla/gorilla-renderable "3.0.0"] ;PinkGorilla Renderable
-                 ]
+                 [org.pinkgorilla/gorilla-renderable "3.0.0"]]
   :profiles
   {:dev
    {:dependencies [[clj-kondo "2019.11.23"]
-                   [org.clojure/java.jdbc "0.4.1"]
-                   [postgresql "9.3-1102.jdbc41"]]
+                   ;; [org.clojure/java.jdbc "0.4.1"]
+                   ;; [postgresql "9.3-1102.jdbc41"]
+                   ]
     :plugins      [[lein-cljfmt "0.6.6"]
                    [lein-cloverage "1.1.2"]]
     :aliases      {"clj-kondo" ["run" "-m" "clj-kondo.main"]}
-    :cloverage    {:codecov? true
-                   ;; In case we want to exclude stuff
-                   ;; :ns-exclude-regex [#".*util.instrument"]
-                   ;; :test-ns-regex [#"^((?!debug-integration-test).)*$$"]
-                   }
+    :cloverage    {:codecov? true}
     ;; TODO : Make cljfmt really nice : https://devhub.io/repos/bbatsov-cljfmt
     :cljfmt       {:indents {as->                [[:inner 0]]
                              with-debug-bindings [[:inner 0]]
